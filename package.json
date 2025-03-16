@@ -10,7 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codemirror/commands": "^6.8.0",
+    "@codemirror/lang-python": "^6.1.7",
+    "@codemirror/language-data": "^6.5.1",
+    "@codemirror/state": "^6.5.2",
+    "@codemirror/view": "^6.36.4",
+    "@lezer/highlight": "^1.2.1",
+    "@replit/codemirror-vim": "^6.2.1",
     "@tailwindcss/vite": "^4.0.14",
+    "@uiw/codemirror-theme-monokai": "^4.23.10",
+    "@uiw/codemirror-themes": "^4.23.10",
+    "@uiw/react-codemirror": "^4.23.10",
+    "codemirror": "^6.0.1",
+    "formik": "^2.4.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^4.0.14"

@@ -3,9 +3,29 @@
 
 
 @theme {
-  --color-base: #191724;
-  --color-text: #e0def4;
-  --color-primary: #eb6f92;
-  --color-secondary: #31748f;
+  --color-base: #2d2a2e;
+  --color-text: #fcfcfa;
+  --color-primary: #ff6188;
+  --color-secondary: #fc9867;
+  --color-accent: #78dce8;
+  --color-success: #a9dc76; 
   --font-mono: 'IBM Plex Mono', monospace;
+}
+
+.cm-scroller::-webkit-scrollbar {
+  width: 12px;
+  border-radius: 12px;
+}
+
+.cm-scroller::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.cm-scroller::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.cm-focused {
+  outline: none !important;
 }
