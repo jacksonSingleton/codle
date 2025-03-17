@@ -19,6 +19,10 @@ function App() {
     if (localStorage.getItem("attempt") === null) {
       localStorage.setItem("attempt", "0");
     }
+
+    if (localStorage.getItem("success") === "true") {
+      setSuccess(true);
+    }
     setAttempt(parseInt(localStorage.getItem("attempt") || "0"));
   }, []);
 
@@ -78,6 +82,7 @@ function App() {
         // Set success if all tests pass
         const allPassed = data.summary?.passed === data.summary?.total;
         setSuccess(allPassed);
+        localStorage.setItem("success", "true");
       } else {
         console.error("No results found in response:", data);
       }
@@ -111,7 +116,7 @@ function App() {
 
         {success ? (
           <div className="w-3/4 h-3/4 flex items-center justify-center">
-            <div className="bg-success text-success-content p-8 rounded-lg text-center">
+            <div className="bg-success text-success-content p-8 rounded-lg text-center text-base">
               <h2 className="text-3xl font-bold mb-4">
                 🎉 Congratulations! 🎉
               </h2>
