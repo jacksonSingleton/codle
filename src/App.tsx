@@ -11,18 +11,45 @@ function App() {
   const [testResults, setTestResults] = useState([]);
   const [success, setSuccess] = useState(false);
   const [questionId, setQuestionId] = useState("");
+  const [previousQuestionId, setPreviousQuestionId] = useState("");
 
   const update = (val: string) => {
     setCode(val);
   };
 
   useEffect(() => {
+    // Load the previous question ID from localStorage
+    const storedQuestionId = localStorage.getItem("currentQuestionId");
+    if (storedQuestionId) {
+      setPreviousQuestionId(storedQuestionId);
+    }
+
     if (localStorage.getItem("attempt") === null) {
       localStorage.setItem("attempt", "0");
     }
 
     setAttempt(parseInt(localStorage.getItem("attempt") || "0"));
   }, []);
+
+  // Reset attempts when question ID changes
+  useEffect(() => {
+    if (
+      questionId &&
+      questionId !== previousQuestionId &&
+      previousQuestionId !== ""
+    ) {
+      // Reset attempt counter for new question
+      localStorage.setItem("attempt", "0");
+      setAttempt(0);
+      // Update the stored question ID
+      localStorage.setItem("currentQuestionId", questionId);
+      setPreviousQuestionId(questionId);
+    } else if (questionId && previousQuestionId === "") {
+      // First load of a question
+      localStorage.setItem("currentQuestionId", questionId);
+      setPreviousQuestionId(questionId);
+    }
+  }, [questionId, previousQuestionId]);
 
   const incrementAttempt = () => {
     const newAttempt = attempt + 1;
