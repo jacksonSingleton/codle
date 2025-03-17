@@ -10,6 +10,7 @@ function App() {
   const [attempt, setAttempt] = useState(0);
   const [testResults, setTestResults] = useState([]);
   const [success, setSuccess] = useState(false);
+  const [questionId, setQuestionId] = useState("");
 
   const update = (val: string) => {
     setCode(val);
@@ -20,9 +21,6 @@ function App() {
       localStorage.setItem("attempt", "0");
     }
 
-    if (localStorage.getItem("success") === "true") {
-      setSuccess(true);
-    }
     setAttempt(parseInt(localStorage.getItem("attempt") || "0"));
   }, []);
 
@@ -42,6 +40,7 @@ function App() {
         throw new Error("Failed to fetch problem");
       }
       const data = await res.json();
+      setQuestionId(data.id);
       setCode(data.startingCode.python);
     } catch (err) {
       console.error("Error fetching problem:", err);
@@ -82,7 +81,7 @@ function App() {
         // Set success if all tests pass
         const allPassed = data.summary?.passed === data.summary?.total;
         setSuccess(allPassed);
-        localStorage.setItem("success", "true");
+        if (allPassed) localStorage.setItem("success", questionId);
       } else {
         console.error("No results found in response:", data);
       }
@@ -92,6 +91,16 @@ function App() {
       console.error("Error running code:", err);
     }
   };
+
+  useEffect(() => {
+    console.log("questionId:", questionId);
+    if (
+      questionId.length > 0 &&
+      localStorage.getItem("success") === questionId
+    ) {
+      setSuccess(true);
+    }
+  }, [questionId]);
 
   useEffect(() => {
     fetchProblem();
