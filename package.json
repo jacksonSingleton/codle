@@ -21,6 +21,8 @@
     "@uiw/codemirror-theme-monokai": "^4.23.10",
     "@uiw/codemirror-themes": "^4.23.10",
     "@uiw/react-codemirror": "^4.23.10",
+    "axios": "^1.8.3",
+    "clsx": "^2.1.1",
     "codemirror": "^6.0.1",
     "formik": "^2.4.6",
     "react": "^19.0.0",
